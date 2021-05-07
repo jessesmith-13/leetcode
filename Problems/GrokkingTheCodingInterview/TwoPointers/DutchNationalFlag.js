@@ -12,7 +12,36 @@
 // Output: [0 0 1 2 2 2 ]
 
 const dutch_flag_sort = function(arr) {
-  return arr.sort((a, b) => a - b);
+  // return arr.sort((a, b) => a - b);
+
+  //declare variables: high (the end of the arr), low(0), i(0)
+  let high = arr.length - 1,
+    low = 0,
+    i = 0;
+  //while the i is less than or equal to high
+  while (i <= high) {
+    //if the current number is 0
+    if (arr[i] === 0) {
+      //swap it with the low
+      [arr[i], arr[low]] = [arr[low], arr[i]]
+      //increment i by 1
+      i++;
+      //increment low by 1
+      low++;
+      //if the current number is 1
+    } else if (arr[i] === 1) {
+      //increment i by 1
+      i++;
+      //if the current number is 2
+    } else if (arr[i] === 2) {
+      //swap it with high
+      [arr[i], arr[high]] = [arr[high], arr[i]];
+      //decrease high by 1
+      high--;
+    }
+  }
+  //return array
+  return arr;
 };
 
 console.log(dutch_flag_sort([1, 0, 2, 1, 0]))
