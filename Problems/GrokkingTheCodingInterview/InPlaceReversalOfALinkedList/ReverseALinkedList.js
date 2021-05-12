@@ -22,12 +22,12 @@ class Node {
 const reverse = function(head) {
   let current = head,
     previous = null;
-    while (current !== null) {
-      let next = current.next;
-      current.next = previous;
-      previous = current;
-      current = next;
-    }
+  while (current !== null) {
+    let next = current.next;
+    current.next = previous;
+    previous = current;
+    current = next;
+  }
   return previous;
 };
 
