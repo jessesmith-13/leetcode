@@ -32,30 +32,35 @@
 // Path to get the maximum gold, 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7.
 
 var getMaximumGold = function(grid) {
-  //define variables: startingPoint, highestGoldTotal (0), moveGrid
-  //iterate through the rows
-    //iterate through the columns
-    //if the current number is 0
-      //continue
-    //otherwise
-      //set the moveGrid to a grid full of O's
-      //set the starting point to the current coordinates
-      //call the helper function with the grid, moveGrid and starting coordinates
+ //declare variables: highestGoldTotal(0)
+ //iterate through rows
+  //iterate through cols
+    //if the current number doesn't equal 0
+      //call totalGold with the grid, row, col, highestGoldTotal
 };
 
-const totalGold = (grid, moveGrid, row, col, highestGoldTotal) => {
-  //declare variables: goldTotal (0), currentPosition(grid[row][col])
-  //while there are still valid moves
-    //reset the moveGrid
-    //add the current position to the total
-    //if the position above is valid
-      //set 
-  //add the current position to the total
-  //if the space above the current position is a valid move
-  //return highestGoldTotal
+const totalGold = (grid, row, col, highestGoldTotal) => {
+  let currentSum = 0;
+  const innerFunc = (startingPoint, row, col) => {
+    if (isValidMove(grid, row - 1, col)) { //up
+      innerFunc(row - 1, col)
+    }
+    if (isValidMove(grid, row, col + 1)) { //right
+      innerFunc(row, col + 1);
+    }
+    if (isValidMove(grid, row + 1, col)) { //down
+      currentSum += startingPoint + innerFunc(row + 1, col)
+    }
+    if (isValidMove(grid, row, col - 1)) { //left
+      innerFunc(row, col - 1);
+    }
+  }
+  innerFunc(grid[row][col], row, col)
 }
 
-const isValidMove = (moveGrid, row, col) => {
-  //if the space is valid, return true
-  //return false;
+const isValidMove = (grid, row, col) => {
+  if (grid[row][col] === undefined || grid[row][col] === 0) {
+    return false;
+  }
+  return true;
 }
