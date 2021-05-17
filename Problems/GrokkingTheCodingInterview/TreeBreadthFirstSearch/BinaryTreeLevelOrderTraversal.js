@@ -39,7 +39,6 @@ const traverse = function(root) {
     result.push(currentLevel);
     //if the left isn't null
   }
-  console.log(result);
   return result;
 };
 
