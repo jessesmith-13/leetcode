@@ -19,16 +19,16 @@
 //e:
 
 var partitionLabels = function(s) {
-  
-  
   //declare variables: furthestIndex, uniques([]), result([])
   let furthestIndex = -Infinity,
-    uniques = [],
-    result = [];
+  uniques = [],
+  result = [];
   //iterate through s
   for (let i = 0; i < s.length; i++) {
     
-    console.log(s[i]);
+    if (uniques.includes(s[i]) && i !== furthestIndex) {
+      continue;
+    }
     //declare variable: end(the end of the array)
     let end = s.length - 1;
     //while end doesn't equal i
@@ -41,10 +41,6 @@ var partitionLabels = function(s) {
       //furthestIndex equals end
       furthestIndex = end;
     }
-    //push the current character into uniques
-    // uniques.push(s[i]);
-    // console.log('i', i)
-    // console.log('furthest', furthestIndex);
     //if i is greater than or equal to furthestIndex, 
     if (i >= furthestIndex && furthestIndex !== -Infinity) {
       //push i + 1 into the result array
@@ -55,8 +51,8 @@ var partitionLabels = function(s) {
       i = -1;
       //set furthestIndex to -infinity
       furthestIndex = -Infinity;
-     
     }
+    uniques.push(s[i]);
   }
   return result;
 };
