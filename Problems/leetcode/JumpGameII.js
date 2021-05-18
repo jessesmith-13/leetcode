@@ -17,9 +17,41 @@
 // Output: 2
 
 var jump = function(nums) {
-  //declare variables: currentPos (0), jumps(0), currentJump(nums[0])
-  //while the currentPosition doesn't equal the end
+  if (nums.length === 1 && nums[0] === 0) {
+    return 0;
+  }
+  //declare variables: start (0), end(0), jumps(0), i (0)
+  let start = 0,
+    end = 0,
+    jumps = 0;
+  //while end is less than or equal to the end of the array
+  while (end <= nums.length - 1) {
     //declare variable: max(-1)
-    //while the currentJump is greater than 0
-      //if 
+    let max = -1;
+    //end becomes the current end plus the current number
+    end += nums[end];
+    //while start is less than or equal to end
+    if (end >= nums.length - 1) {
+      jumps++;
+      break;
+    }
+    while (start <= end) {
+      //if start is greater than max
+      if (nums[start] > max) {
+        //start becomes max
+        max = nums[start];
+      }
+      //start++
+      start++;
+    }
+    //end and start become the index that max is
+    end = nums.indexOf(max), start = nums.indexOf(max);
+    //jump increases by 1
+    jumps++;
+  }
+  return jumps
 };
+
+console.log(jump([2,3,1,1,4]))
+console.log(jump([2,3,0,1,4]))
+console.log(jump([0]))
