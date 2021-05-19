@@ -1,3 +1,5 @@
+// INCOMPLETE
+
 // Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, 
 // and return an array of the non-overlapping intervals that cover all the intervals in the input.
 
@@ -14,13 +16,31 @@
 // Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 
 var merge = function(intervals) {
+  intervals.sort((a, b) => a[0] - b[0])
   //declare vars: result([]), start(-1)
   let result = [],
-    min = -Infinity,
-    max = Infinity;
+    min = Infinity,
+    max = -Infinity;
   //iterate through intervals
-  for (let i = 0; i < intervals.length; i++) {
-    
+  for (let i = 0; i < intervals.length - 1; i++) {
+    if (intervals[i][1] >= intervals[i + 1][0]) {
+      min = Math.min(min, intervals[i][0], intervals[i + 1][0])
+      max = Math.max(max, intervals[i][1], intervals[i + 1][1])
+      if (i === intervals.length - 2) {
+        result.push([min, max])
+      }
+    } else {
+      if (min === Infinity) {
+        result.push(intervals[i])
+      } else {
+        result.push([min, max]);
+        min = Infinity;
+        max = -Infinity;
+      }
+      if (i === intervals.length - 2) {
+        result.push(intervals[i + 1]);
+      }
+    }
   }
   //return result
   return result;
@@ -28,5 +48,8 @@ var merge = function(intervals) {
 
 console.log(merge([[1,3],[2,6],[8,10],[15,18]]))
 console.log(merge([[1,4],[4,5]]))
-console.log(merge([[1,4],[0,4]]))
-console.log(merge([[1,4],[0,1]]))
+console.log(merge([[1,4],[0,4]])) //[0, 4]
+console.log(merge([[1,4],[0,1]])) //[0, 4]
+console.log(merge([[1,4],[0,0]])) //[0, 0], [1, 4]
+console.log(merge([[2,3],[4,5],[6,7],[8,9],[1,10]]))
+
