@@ -16,11 +16,14 @@
 // Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 
 var merge = function(intervals) {
+  //sort the array, lowest to highest
   intervals.sort((a, b) => a[0] - b[0])
+
   //declare vars: result([]), start(-1)
   let result = [],
     min = Infinity,
-    max = -Infinity;
+    max = -Infinity,
+    start = -1;
   //iterate through intervals
   for (let i = 0; i < intervals.length - 1; i++) {
     if (intervals[i][1] >= intervals[i + 1][0]) {
@@ -51,5 +54,5 @@ console.log(merge([[1,4],[4,5]]))
 console.log(merge([[1,4],[0,4]])) //[0, 4]
 console.log(merge([[1,4],[0,1]])) //[0, 4]
 console.log(merge([[1,4],[0,0]])) //[0, 0], [1, 4]
-console.log(merge([[2,3],[4,5],[6,7],[8,9],[1,10]]))
+console.log(merge([[2,3],[4,5],[6,7],[8,9],[1,10]])) //[1, 10]
 
