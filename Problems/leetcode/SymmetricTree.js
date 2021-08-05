@@ -21,6 +21,7 @@ var isSymmetric = function(root) {
       pointer1++;
       pointer2--;
     }
+    
   }
   return true;
 };
