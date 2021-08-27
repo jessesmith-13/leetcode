@@ -11,7 +11,7 @@
 // Output: "leotcede"
 
 var reverseVowels = function(s) {
-  let vowels = 'aeiou';
+  let vowels = 'aeiouAEIOU';
   let vowelsInS = s.split('').filter(letter => vowels.includes(letter));
   let vowelCount = 0;
   s = s.split('');
@@ -25,4 +25,4 @@ var reverseVowels = function(s) {
   return s.join('');
 };
 
-console.log(reverseVowels('hello'));
+console.log(reverseVowels('aA'));
