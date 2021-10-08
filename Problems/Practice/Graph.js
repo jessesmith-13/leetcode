@@ -31,14 +31,43 @@ class Graph {
     }
     delete this.adjacencyList[v];
   }
+
+  bfs(start) {
+    //declare visited obj, empty
+    const visited = {};
+    //declare adjList
+    const adjList = this.adjacencyList;
+    //declare results arr
+    const results = [];
+    //declare helper func, takes in a vertex
+    const traverse = (v) => {
+      //base case: if vertex is falsey, return
+      if (!v) return;
+      //add vertex to visited
+      visited[v] = true;
+      //push vertex to results
+      results.push(v);
+      //iterate through neighbors of the vertex
+      adjList[v].forEach(neighbor => {
+        //if the current node isn't in visited
+        if (!visited[neighbor]) {
+          //call recursive func on it!
+          traverse(neighbor);
+        }
+      })
+    }
+    //call helper func
+    traverse(start);
+    //return results
+    return results;
+  }
 }
 
 let g = new Graph;
-g.addVertex(1);
-g.addVertex(2);
-g.addVertex(3);
-g.addEdge(1, 3);
-g.addEdge(2, 1);
-g.removeVertex(3);
-g.removeVertex(2);
+g.addVertex('A');
+g.addVertex('B');
+g.addVertex('C');
+g.addEdge('A', 'B');
+g.addEdge('B', 'C');
 console.log(g);
+console.log(g.bfs('C'));
