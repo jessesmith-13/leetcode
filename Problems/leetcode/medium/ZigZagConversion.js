@@ -66,8 +66,10 @@ var convert = function(s, numRows) {
   return output;
 };
 
-console.log(convert('PAYPALISHIRING', 3))
+// console.log(convert('PAYPALISHIRING', 3))
 
 // const testArr = [];
 // testArr[3] = 'wow';
 // console.log(testArr[0]);
+
+console.log(2**31);
