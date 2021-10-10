@@ -27,14 +27,22 @@ class Interval {
 
 
 const merge = function(intervals) {
-  merged = []
-  
+  let merged = [],
+    start = intervals[0].start,
+    end = intervals[0].end;
+  for (let i = 1; i < intervals.length; i++) {
+    let curInterval = intervals[i];
+    if (curInterval.start <= end) {
+      end = Math.max(end, curInterval.end);
+    } else {
+      merged.push(new Interval(start, end));
+      start = curInterval.start;
+      end = curInterval.end;
+    }
+  }
+  merged.push(new Interval(start, end));
   return merged;
 };
-
-const checkOverlap = function() {
-  
-}
 
 merged_intervals = merge([new Interval(1, 4), new Interval(2, 5), new Interval(7, 9)]);
 result = "";
