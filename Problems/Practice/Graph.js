@@ -32,34 +32,50 @@ class Graph {
     delete this.adjacencyList[v];
   }
 
-  bfs(start) {
-    //declare visited obj, empty
-    const visited = {};
-    //declare adjList
-    const adjList = this.adjacencyList;
-    //declare results arr
-    const results = [];
-    //declare helper func, takes in a vertex
-    const traverse = (v) => {
-      //base case: if vertex is falsey, return
-      if (!v) return;
+  dfs(start) {
+    //declare visited obj, output arr, adj list
+    let visited = {},
+      output = [],
+      adjList = this.adjacencyList;
+    //declare helper func
+    const go = (vertex) => {
+      //base case: if there's no node, just return up the stack
+      if (!vertex) return;
       //add vertex to visited
-      visited[v] = true;
-      //push vertex to results
-      results.push(v);
-      //iterate through neighbors of the vertex
-      adjList[v].forEach(neighbor => {
-        //if the current node isn't in visited
+      visited[vertex] = true;
+      //push vertex to output
+      output.push(vertex);
+      //iterate through the neighbors
+      adjList[vertex].forEach(neighbor => {
+        //if the neighbor hasn't been visited already
         if (!visited[neighbor]) {
-          //call recursive func on it!
-          traverse(neighbor);
+          //call the recursion on the neighbor!
+          go(neighbor);
         }
       })
     }
-    //call helper func
-    traverse(start);
-    //return results
-    return results;
+    //call helper func on the start
+    go(start);
+    //return output arr
+    return output;
+  }
+
+  bfs(start) {
+    let queue = [start],
+      output = [],
+      visited = [start],
+      curVertex;
+    while (queue.length) {
+      curVertex = queue.shift();
+      output.push(curVertex);
+      this.adjacencyList[curVertex].forEach(neighbor => {
+        if (!visited.includes(neighbor)) {
+          visited.push(neighbor);
+          queue.push(neighbor);
+        }
+      })
+    }
+    return output;
   }
 }
 
@@ -67,7 +83,15 @@ let g = new Graph;
 g.addVertex('A');
 g.addVertex('B');
 g.addVertex('C');
+g.addVertex('D');
+g.addVertex('E');
+g.addVertex('F');
 g.addEdge('A', 'B');
-g.addEdge('B', 'C');
+g.addEdge('A', 'C');
+g.addEdge('B', 'D');
+g.addEdge('C', 'E');
+g.addEdge('D', 'E');
+g.addEdge('D', 'F');
+g.addEdge('E', 'F');
 console.log(g);
-console.log(g.bfs('C'));
+console.log(g.bfs('A'));
