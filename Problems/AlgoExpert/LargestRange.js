@@ -10,43 +10,40 @@
 //output: [0, 7]
 
 function largestRange(array) {
-  if (array.length === 1) {
-		return [array[0], array[0]]
-	}
-  array.sort((a, b) => a - b);
-  let start = 0,
-    end = 0,
-    longestRange,
-    longestDistance = -Infinity;
-    while (end !== array.length - 1) {
-      if (array[end + 1] !== array[end] + 1) {
-        if (end === start) {
-          end++;
-          start++;
-        } else if (calculateDistance(array[start], array[end]) > longestDistance) {
-          longestRange = [array[start], array[end]]
-          longestDistance = calculateDistance(array[start], array[end]);
-        }
+  let hashMap = {},
+  longestLength = -Infinity,
+  longestRange = [];
+  array.forEach(num => {
+    if (!hashMap[num]) {
+      hashMap[num] = true;
+    }
+  })
+  for (let i = 0; i < array.length; i++) {
+    let start = array[i],
+    end = array[i];
+    if (hashMap[array[i]]) {
+      hashMap[array[i]] = false
+      while (hashMap[start - 1]) {
+        start--;
+        hashMap[start] = false;
+      }
+      while (hashMap[end + 1]) {
         end++;
-        start = end;
-      } else {
-        end++;
+        hashMap[end] = false;
+      }
+      if (getLength(start,end) > longestLength) {
+        longestLength = getLength(start,end);
+        longestRange = [start,end];
       }
     }
-  if (calculateDistance(array[start], array[end] > longestDistance)) {
-    longestRange = [array[start], array[end]];
   }
-  return longestRange;
+  return longestRange
 }
 
-const calculateDistance = (start, end) => {
-  if (start < 0 && end < 0) {
-    return end - start + 2;
-  } else {
-    return end - start + 1;
-  }
+function getLength(start, end) {
+  return end - start;
 }
 
-// console.log(largestRange([1, 11, 3, 0, 15, 5, 2, 4, 10, 7, 12, 6]))
+console.log(largestRange([0, 1, 11, 3, 15, 5, 2, 4, 10, 7, 12, 6]))
 
-console.log([[]].length);
+// [0,1,2,3,4,5,6,7,10,11,12,15]
