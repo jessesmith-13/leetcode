@@ -9,7 +9,7 @@
 // Also note that the start of any particular interval will always be less than or equal to the end of that interval.
 
 function mergeOverlappingIntervals(array) {
-  array.sort((a, b) => a[0] - b[0])
+  array.sort((a, b) => a[0] - b[0]);
   const merged = [];
   for (let i = 0; i < array.length; i++) {
     let currentRange = array[i];

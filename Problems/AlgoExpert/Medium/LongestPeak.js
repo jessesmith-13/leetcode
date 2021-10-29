@@ -21,11 +21,10 @@ function longestPeak(array) {
         }
       }
       if (array[next] === array[prev]) {
-        i = next;
+        i = prev;
         continue;
       }
       while (array[next] < array[prev]) {
-        console.log('should happen once')
         next++;
         prev++;
       }
