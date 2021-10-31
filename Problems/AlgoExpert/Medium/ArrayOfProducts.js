@@ -26,4 +26,3 @@ console.log(arrayOfProducts(array));
 // 40 is equal to 5 x 4 x 2
 // 10 is equal to 5 x 1 x 2
 // 20 is equal to 5 x 1 x 4
-console.log(getProduct([1, 2, 3]))

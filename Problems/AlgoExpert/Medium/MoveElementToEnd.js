@@ -14,7 +14,6 @@ function moveElementToEnd(array, toMove) {
   }
   i = 0;
   j = array.length - 1;
-  while (i < j)
   return array;
 }
 
