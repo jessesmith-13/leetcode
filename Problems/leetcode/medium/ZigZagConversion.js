@@ -72,4 +72,3 @@ var convert = function(s, numRows) {
 // testArr[3] = 'wow';
 // console.log(testArr[0]);
 
-console.log(2**31);
