@@ -19,3 +19,7 @@ function includes(smallString, bigString) {
 const bigString = 'this is a big string';
 const smallStrings = ['this', 'yo', 'is', 'a', 'bigger', 'string', 'kappa'];
 console.log(multiStringSearch(bigString, smallStrings));
+
+const obj = new Array('tim', 'kim', 'jim');
+let x;
+console.log(x === null);
