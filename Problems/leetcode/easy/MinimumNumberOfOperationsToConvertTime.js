@@ -27,7 +27,6 @@
 var convertTime = function(current, correct) {
   const targetTimeInMinutes = Number(correct.split(':')[0] * 60) + Number(correct.split(':')[1]);
   const currentTimeInMinutes = Number(current.split(':')[0] * 60) + Number(current.split(':')[1]);
-  console.log (targetTimeInMinutes, currentTimeInMinutes)
   let amountOfTimeRemaining = targetTimeInMinutes - currentTimeInMinutes;
   let operationCounter = 0;
 
@@ -35,18 +34,22 @@ var convertTime = function(current, correct) {
     if (amountOfTimeRemaining - 60 >= 0) {
       amountOfTimeRemaining -= 60;
       operationCounter++;
-      console.log('should run 23 times');
       continue;
     }
+
+    if (amountOfTimeRemaining - 15 >= 0) {
+      amountOfTimeRemaining -= 15;
+      operationCounter++;
+      continue;
+    }
+
     if (amountOfTimeRemaining - 5 >= 0) {
       amountOfTimeRemaining -= 5;
       operationCounter++;
-      console.log('should run 11 times')
       continue;
     }
     amountOfTimeRemaining -= 1;
     operationCounter++;
-    console.log('should run 4 times');
   }
   return operationCounter;
 };
